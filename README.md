@@ -1,199 +1,145 @@
-# LodgifyWP - WordPress Property Booking System
+# LodgifyWP
 
 A comprehensive WordPress plugin for managing property bookings, with integrated calendar synchronization, Stripe payments, and owner profiles.
 
 ## Features
 
-### Property Management
-- Custom post type for properties
-- Property categorization (type, amenities, location)
-- Advanced Custom Fields integration for property details
-- Price per night, maximum guests, bedrooms, bathrooms
-- Property gallery and location management
-- Check-in/check-out times and minimum stay requirements
+- **Property Management**: Create and manage property listings with detailed information
+- **Booking System**: Handle reservations with automated availability checking
+- **Payment Processing**: Secure payments via Stripe integration
+- **Calendar Integration**: Sync with iCal, Google Calendar, and Microsoft 365
+- **Email Notifications**: Automated emails for bookings and confirmations
+- **Owner Profiles**: Manage property owner information
+- **Flexible Content**: Built with ACF flexible content for maximum customization
 
-### Booking System
-- Secure booking management
-- Guest information collection
-- Automated status updates
-- Email notifications
-- Payment processing via Stripe
-- Booking calendar with availability display
+## Requirements
 
-### Owner Profiles
-- Custom post type for property owners
-- Detailed owner profiles with:
-  - Contact information
-  - Profile photo
-  - Biography
-  - Welcome message for guests
-  - Customizable reminder settings
+- WordPress 5.8 or higher
+- PHP 7.4 or higher
+- ACF Pro plugin
+- Timber plugin
+- SSL certificate (for Stripe integration)
+
+## Installation
+
+1. Download the latest release from the [releases page](https://github.com/WonkyPixelUK/LodgifyWP/releases)
+2. Upload the plugin ZIP file through the WordPress admin panel or extract it to your `/wp-content/plugins/` directory
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. Install and activate required plugins (ACF Pro and Timber)
+5. Configure the plugin settings
+
+## Configuration
+
+### Stripe Integration
+
+1. Create a [Stripe account](https://stripe.com) if you haven't already
+2. Get your API keys from the Stripe Dashboard
+3. Go to LodgifyWP Settings > Payments
+4. Enter your Stripe API keys (test and live modes available)
 
 ### Calendar Integration
-- Synchronization with:
-  - Google Calendar
-  - Microsoft 365
-  - iCal
-- Two-way sync capabilities
-- Real-time availability updates
-- Conflict prevention
 
-### Automated Reminders
-- Configurable reminder schedules
-- Separate notifications for:
-  - Guests (upcoming stay details)
-  - Owners (upcoming guest arrival)
-- Customizable email templates
-- Pre-arrival checklists for owners
+1. Navigate to LodgifyWP Settings > Calendar
+2. Configure your preferred calendar services:
+   - For Google Calendar: Enter your Client ID and Secret
+   - For Microsoft 365: Enter your Application ID and Secret
+   - For iCal: Add feed URLs directly
 
-### Payment Processing
-- Stripe integration
-- Secure payment handling
-- Automated booking status updates
-- Payment confirmation emails
+### Email Settings
 
-## Technical Details
+1. Go to LodgifyWP Settings > Emails
+2. Customize email templates for:
+   - Booking confirmations
+   - Payment receipts
+   - Admin notifications
+3. Test email functionality using the test button
 
-### Built With
-- WordPress
-- Advanced Custom Fields (ACF)
-- Timber/Twig for templating
-- SCSS for styling
-- Stripe API for payments
-- Google Calendar API
-- Microsoft Graph API
+## Usage
+
+### Adding a New Property
+
+1. Go to Properties > Add New
+2. Fill in the property details:
+   - Basic information (title, description)
+   - Pricing and availability
+   - Amenities and features
+   - Location details
+   - House rules
+3. Add property images and gallery
+4. Set availability calendar
+5. Publish the property
+
+### Managing Bookings
+
+1. Access the Bookings menu
+2. View all bookings with filters for:
+   - Status (pending, confirmed, completed)
+   - Date range
+   - Property
+3. Process payments and update booking status
+4. Send manual notifications if needed
+
+### Calendar Management
+
+1. Navigate to the Calendar view
+2. Sync with external calendars
+3. View availability across all properties
+4. Manage booking statuses with color coding
+5. Set automated status updates
+
+## Development
 
 ### File Structure
+
 ```
 lodgifywp/
 ├── assets/
-│   ├── scss/
-│   │   ├── abstracts/
-│   │   ├── base/
-│   │   ├── blocks/
-│   │   └── main.scss
+│   ├── css/
 │   ├── js/
-│   └── css/
+│   └── images/
 ├── inc/
 │   ├── class-lodgifywp-property.php
 │   ├── class-lodgifywp-booking.php
 │   ├── class-lodgifywp-payment.php
 │   ├── class-lodgifywp-calendar.php
-│   ├── class-lodgifywp-owner.php
-│   └── class-lodgifywp-reminder.php
-├── views/
-│   └── emails/
+│   └── class-lodgifywp-owner.php
 ├── template-parts/
+│   ├── property/
+│   ├── booking/
+│   └── emails/
+├── vendor/
+├── composer.json
 └── lodgifywp.php
 ```
 
-## Installation
+### Customization
 
-1. Clone the repository:
-```bash
-git clone https://github.com/WonkyPixelUK/LodgifyWP.git
-```
+The plugin uses WordPress standards and follows these principles:
+- SCSS for styling (no direct CSS)
+- Twig templates via Timber
+- ACF Flexible Content for layouts
+- Action and filter hooks for extensibility
 
-2. Install dependencies:
-```bash
-composer install
-npm install
-```
+### Adding Custom Features
 
-3. Configure API Keys:
-- Set up Stripe API keys
-- Configure Google Calendar API credentials
-- Set up Microsoft 365 API credentials
+1. Use WordPress action and filter hooks
+2. Extend existing classes as needed
+3. Follow the established naming conventions
+4. Add new templates to the appropriate directory
 
-4. Activate the plugin in WordPress admin panel
+## Updates
 
-## Configuration
-
-### Required Plugins
-- Advanced Custom Fields PRO
-- Timber
-
-### API Setup
-
-#### Stripe
-1. Create a Stripe account
-2. Obtain API keys from Stripe Dashboard
-3. Add keys to WordPress settings
-
-#### Google Calendar
-1. Create a project in Google Cloud Console
-2. Enable Google Calendar API
-3. Create OAuth 2.0 credentials
-4. Configure redirect URI
-5. Add credentials to plugin settings
-
-#### Microsoft 365
-1. Register application in Azure Portal
-2. Configure OAuth 2.0 settings
-3. Add required permissions
-4. Configure redirect URI
-5. Add credentials to plugin settings
-
-## Usage
-
-### Adding Properties
-1. Navigate to Properties > Add New
-2. Fill in property details
-3. Set pricing and availability
-4. Assign property owner
-5. Configure booking settings
-
-### Managing Owners
-1. Go to Properties > Property Owners
-2. Create owner profiles
-3. Configure reminder preferences
-4. Add welcome messages and photos
-
-### Booking Management
-1. View all bookings under Bookings menu
-2. Process payments
-3. Manage calendar availability
-4. Send notifications
-
-### Calendar Sync
-1. Configure calendar integration in settings
-2. Connect desired calendar services
-3. Set sync frequency
-4. Monitor sync status
-
-## Development
-
-### SCSS Compilation
-```bash
-npm run watch
-```
-
-### Building for Production
-```bash
-npm run build
-```
+The plugin includes automatic updates via GitHub:
+1. Updates are checked automatically in WordPress
+2. New versions can be installed with one click
+3. Release notes are available in the WordPress admin
 
 ## Support
 
-For support, please create an issue in the GitHub repository or contact the development team.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+- [Documentation](https://github.com/WonkyPixelUK/LodgifyWP/wiki)
+- [Issue Tracker](https://github.com/WonkyPixelUK/LodgifyWP/issues)
+- [Changelog](CHANGELOG.md)
 
 ## License
 
-This project is licensed under the GPL v2 or later - see the LICENSE file for details.
-
-## Acknowledgments
-
-- WordPress
-- Advanced Custom Fields
-- Timber
-- Stripe
-- Google Calendar API
-- Microsoft Graph API 
+This project is licensed under the GPL v2 or later - see the [LICENSE](LICENSE) file for details. 
