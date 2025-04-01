@@ -1,0 +1,61 @@
+name: Beta Tester Sign-up
+description: Register your interest in beta testing LodgifyWP
+title: "[Beta Test]: Your Name/Company"
+labels: [beta-tester]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for your interest in beta testing LodgifyWP!"
+  - type: input
+    id: website
+    attributes:
+      label: Website URL
+      description: The website where you plan to use LodgifyWP
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: dropdown
+    id: wp_experience
+    attributes:
+      label: WordPress Experience Level
+      description: How would you rate your experience with WordPress?
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+        - Expert/Developer
+    validations:
+      required: true
+  - type: checkboxes
+    id: features
+    attributes:
+      label: Features of Interest
+      description: Which features are you most interested in testing?
+      options:
+        - label: Property Management
+        - label: Booking System Integration
+        - label: Payment Processing
+        - label: Calendar Sync
+        - label: Channel Manager Integration
+        - label: Custom Development
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case
+      description: Please describe how you plan to use LodgifyWP
+      placeholder: Tell us about your property rental business and what you hope to achieve with LodgifyWP
+    validations:
+      required: true
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional Information
+      description: Any other details you would like to share?
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this form, you agree to follow our beta testing guidelines
+      options:
+        - label: I agree to provide constructive feedback and report any issues I encounter
+          required: true
