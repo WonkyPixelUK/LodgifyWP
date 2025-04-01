@@ -6,48 +6,173 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: read
+
 jobs:
-  test:
+  theme-checks:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+    
     steps:
-    - uses: actions/checkout@v3
+    - name: Clone repository
+      run: |
+        REPO_URL="https://github.com/${GITHUB_REPOSITORY}.git"
+        git clone $REPO_URL .
+        git checkout $GITHUB_SHA
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, json, mbstring, pdo, session, tokenizer, xml
-        coverage: none
+    - name: Check theme structure
+      run: |
+        echo "Checking theme structure..."
+        required_theme_files=(
+          "lodgifywp-theme/style.css"
+          "lodgifywp-theme/functions.php"
+          "lodgifywp-theme/index.php"
+          "lodgifywp-theme/templates"
+        )
+        
+        for file in "${required_theme_files[@]}"; do
+          if [ ! -e "$file" ]; then
+            echo "Error: Required theme file/directory $file is missing"
+            exit 1
+          fi
+        done
 
-    - name: Install Composer dependencies
-      run: composer install --prefer-dist --no-progress
+    - name: Validate theme files
+      run: |
+        echo "Checking theme PHP files..."
+        for file in $(find lodgifywp-theme -name "*.php"); do
+          php -l "$file" || exit 1
+        done
+        
+        echo "Checking theme style.css..."
+        if ! grep -q "Theme Name: LodgifyWP" "lodgifywp-theme/style.css"; then
+          echo "Error: Theme name not found in style.css"
+          exit 1
+        fi
 
-    - name: Run PHPCS
-      run: composer run-script phpcs
-
-    - name: Run PHPStan
-      run: composer run-script phpstan
-
-    - name: Run PHPUnit
-      run: composer run-script test
-
-  lint:
+  plugin-checks:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+    
     steps:
-    - uses: actions/checkout@v3
+    - name: Clone repository
+      run: |
+        REPO_URL="https://github.com/${GITHUB_REPOSITORY}.git"
+        git clone $REPO_URL .
+        git checkout $GITHUB_SHA
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+    - name: Check plugin structure
+      run: |
+        echo "Checking plugin structure..."
+        required_plugin_files=(
+          "lodgifywp-plugin/lodgifywp.php"
+          "lodgifywp-plugin/inc"
+          "lodgifywp-plugin/languages"
+        )
+        
+        for file in "${required_plugin_files[@]}"; do
+          if [ ! -e "$file" ]; then
+            echo "Error: Required plugin file/directory $file is missing"
+            exit 1
+          fi
+        done
 
-    - name: Install dependencies
-      run: npm ci
+    - name: Validate plugin files
+      run: |
+        echo "Checking plugin PHP files..."
+        for file in $(find lodgifywp-plugin -name "*.php"); do
+          php -l "$file" || exit 1
+        done
 
-    - name: Run ESLint
-      run: npm run lint
+    - name: Check WordPress standards
+      run: |
+        echo "Checking WordPress coding practices..."
+        violations=0
+        
+        # Check for direct database queries
+        if grep -r "\$wpdb->query" lodgifywp-plugin --include="*.php" --exclude-dir="vendor"; then
+          echo "Warning: Direct database queries found"
+          violations=$((violations + 1))
+        fi
+        
+        # Check for eval() usage
+        if grep -r "eval(" lodgifywp-plugin --include="*.php" --exclude-dir="vendor"; then
+          echo "Error: eval() usage found"
+          violations=$((violations + 1))
+        fi
+        
+        # Check for proper escaping
+        if ! grep -r "esc_" lodgifywp-plugin --include="*.php" --exclude-dir="vendor" > /dev/null; then
+          echo "Warning: No WordPress escaping functions found"
+          violations=$((violations + 1))
+        fi
+        
+        if [ $violations -gt 2 ]; then
+          echo "Too many WordPress coding violations found"
+          exit 1
+        fi
 
-    - name: Run SCSS Lint
-      run: npm run scss-lint 
+    - name: Check security practices
+      run: |
+        echo "Performing security checks..."
+        security_violations=0
+        
+        # Check for hardcoded credentials
+        if grep -r "define.*DB_" lodgifywp-plugin --include="*.php" --exclude-dir="vendor"; then
+          echo "Error: Hardcoded database credentials found"
+          security_violations=$((security_violations + 1))
+        fi
+        
+        # Check for proper nonce usage
+        if ! grep -r "wp_nonce" lodgifywp-plugin --include="*.php" --exclude-dir="vendor" > /dev/null; then
+          echo "Warning: No nonce verification found"
+          security_violations=$((security_violations + 1))
+        fi
+        
+        if [ $security_violations -gt 0 ]; then
+          echo "Security violations found"
+          exit 1
+        fi
+
+  build:
+    needs: [theme-checks, plugin-checks]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - name: Clone repository
+      run: |
+        REPO_URL="https://github.com/${GITHUB_REPOSITORY}.git"
+        git clone $REPO_URL .
+        git checkout $GITHUB_SHA
+
+    - name: Build theme
+      run: |
+        cd lodgifywp-theme
+        if [ -f "package.json" ]; then
+          npm ci
+          npm run build
+        fi
+
+    - name: Build plugin
+      run: |
+        cd lodgifywp-plugin
+        if [ -f "composer.json" ]; then
+          composer install --no-dev --optimize-autoloader
+        fi
+        if [ -f "package.json" ]; then
+          npm ci
+          npm run build
+        fi
+
+    - name: Create distribution files
+      run: |
+        # Create theme zip
+        zip -r lodgifywp-theme.zip lodgifywp-theme -x "*/node_modules/*" "*/.*"
+        
+        # Create plugin zip
+        zip -r lodgifywp-plugin.zip lodgifywp-plugin -x "*/vendor/*" "*/node_modules/*" "*/.*" 

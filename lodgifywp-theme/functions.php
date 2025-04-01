@@ -38,7 +38,7 @@ function lodgifywp_register_required_plugins() {
             'required'           => true,
             'force_activation'   => true,
             'force_deactivation' => false,
-            'version'            => '1.0.1',
+            'version'            => '1.0.2',
         ),
     );
 
@@ -138,11 +138,11 @@ add_action('after_setup_theme', 'lodgifywp_theme_setup');
  */
 function lodgifywp_enqueue_scripts() {
     // Enqueue styles
-    wp_enqueue_style('lodgifywp-style', get_stylesheet_uri(), array(), '1.0.1');
-    wp_enqueue_style('lodgifywp-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.1');
+    wp_enqueue_style('lodgifywp-style', get_stylesheet_uri(), array(), '1.0.2');
+    wp_enqueue_style('lodgifywp-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.2');
     
     // Enqueue scripts
-    wp_enqueue_script('lodgifywp-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.1', true);
+    wp_enqueue_script('lodgifywp-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.2', true);
     
     // Localize script
     wp_localize_script('lodgifywp-main', 'lodgifywpSettings', array(

@@ -1,0 +1,140 @@
+{
+    "key": "group_property_details",
+    "title": "Property Details",
+    "fields": [
+        {
+            "key": "field_price_per_night",
+            "label": "Price Per Night",
+            "name": "price_per_night",
+            "type": "number",
+            "required": 1,
+            "min": 0,
+            "step": "0.01"
+        },
+        {
+            "key": "field_max_guests",
+            "label": "Maximum Guests",
+            "name": "max_guests",
+            "type": "number",
+            "required": 1,
+            "min": 1
+        },
+        {
+            "key": "field_bedrooms",
+            "label": "Number of Bedrooms",
+            "name": "bedrooms",
+            "type": "number",
+            "required": 1,
+            "min": 1
+        },
+        {
+            "key": "field_bathrooms",
+            "label": "Number of Bathrooms",
+            "name": "bathrooms",
+            "type": "number",
+            "required": 1,
+            "min": 1
+        },
+        {
+            "key": "field_property_gallery",
+            "label": "Property Gallery",
+            "name": "property_gallery",
+            "type": "gallery",
+            "required": 0,
+            "min": "",
+            "max": "",
+            "insert": "append",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png"
+        },
+        {
+            "key": "field_check_in_time",
+            "label": "Check-in Time",
+            "name": "check_in_time",
+            "type": "time_picker",
+            "required": 1,
+            "display_format": "g:i a",
+            "return_format": "g:i a"
+        },
+        {
+            "key": "field_check_out_time",
+            "label": "Check-out Time",
+            "name": "check_out_time",
+            "type": "time_picker",
+            "required": 1,
+            "display_format": "g:i a",
+            "return_format": "g:i a"
+        },
+        {
+            "key": "field_minimum_stay",
+            "label": "Minimum Stay (nights)",
+            "name": "minimum_stay",
+            "type": "number",
+            "required": 1,
+            "min": 1,
+            "default_value": 1
+        },
+        {
+            "key": "field_property_location",
+            "label": "Property Location",
+            "name": "property_location",
+            "type": "google_map",
+            "required": 1,
+            "center_lat": "",
+            "center_lng": "",
+            "zoom": "",
+            "height": ""
+        },
+        {
+            "key": "field_house_rules",
+            "label": "House Rules",
+            "name": "house_rules",
+            "type": "repeater",
+            "required": 0,
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Rule",
+            "sub_fields": [
+                {
+                    "key": "field_rule_title",
+                    "label": "Rule Title",
+                    "name": "rule_title",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_rule_description",
+                    "label": "Rule Description",
+                    "name": "rule_description",
+                    "type": "textarea",
+                    "required": 0,
+                    "rows": 3
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "property"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Property details and settings"
+} 
