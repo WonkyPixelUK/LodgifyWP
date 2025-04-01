@@ -1,0 +1,44 @@
+{% extends "emails/base.twig" %}
+
+{% block content %}
+    <div class="header">
+        <h1>{{ __('Upcoming Guest Arrival', 'lodgifywp') }}</h1>
+    </div>
+
+    <p>{{ __('Hello', 'lodgifywp') }} {{ owner.name }},</p>
+
+    <p>{{ __('This is a reminder that you have an upcoming guest arrival at your property.', 'lodgifywp') }}</p>
+
+    <div class="guest-info">
+        <h3>{{ __('Guest Information', 'lodgifywp') }}</h3>
+        <p><strong>{{ __('Name:', 'lodgifywp') }}</strong> {{ guest.name }}</p>
+        <p><strong>{{ __('Phone:', 'lodgifywp') }}</strong> {{ guest.phone }}</p>
+        <p><strong>{{ __('Email:', 'lodgifywp') }}</strong> {{ guest.email }}</p>
+        <p><strong>{{ __('Number of Guests:', 'lodgifywp') }}</strong> {{ guest_count }}</p>
+    </div>
+
+    <div class="details-box">
+        <h3>{{ __('Stay Details', 'lodgifywp') }}</h3>
+        <p><strong>{{ __('Check-in:', 'lodgifywp') }}</strong> {{ check_in_date }}</p>
+        <p><strong>{{ __('Check-out:', 'lodgifywp') }}</strong> {{ check_out_date }}</p>
+    </div>
+
+    <div class="checklist">
+        <h3>{{ __('Pre-arrival Checklist', 'lodgifywp') }}</h3>
+        <ul>
+            <li>{{ __('Clean and prepare the property', 'lodgifywp') }}</li>
+            <li>{{ __('Check all amenities are working', 'lodgifywp') }}</li>
+            <li>{{ __('Ensure fresh linens and towels are available', 'lodgifywp') }}</li>
+            <li>{{ __('Prepare welcome package (if applicable)', 'lodgifywp') }}</li>
+            <li>{{ __('Check heating/cooling systems', 'lodgifywp') }}</li>
+            <li>{{ __('Test all keys/access codes', 'lodgifywp') }}</li>
+            <li>{{ __('Update house manual if needed', 'lodgifywp') }}</li>
+        </ul>
+    </div>
+
+    <p>{{ __("Please ensure everything is ready for your guest's arrival.", 'lodgifywp') }}</p>
+
+    <a href="{{ booking_edit_url }}" class="button">
+        {{ __('View Booking Details', 'lodgifywp') }}
+    </a>
+{% endblock %} 

@@ -1,0 +1,22 @@
+{
+  "name": "house-booking-system",
+  "version": "1.0.0",
+  "description": "A modern WordPress theme for managing holiday property bookings",
+  "scripts": {
+    "start": "npm run watch",
+    "watch": "sass --watch assets/scss/main.scss:assets/css/main.css",
+    "build": "sass assets/scss/main.scss:assets/css/main.css --style compressed",
+    "lint": "eslint assets/js/*.js",
+    "format": "prettier --write \"assets/**/*.{js,scss}\""
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^1.54.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1"
+  },
+  "author": "",
+  "license": "GPL-2.0-or-later"
+} 
