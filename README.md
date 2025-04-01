@@ -44,7 +44,7 @@ We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING
 
 ## Support
 
-Need help? Check our [Support Guide](docs/support.md) or contact us at support@wonkypixel.co.uk.
+Need help? Check our [Support Guide](docs/support.md) or contact us at letsgo@wonkypixel.io.
 
 ## License
 
