@@ -3,6 +3,14 @@ description: "Register your interest in beta testing LodgifyWP"
 title: "[Beta Test]: Your Name/Company"
 labels: ["beta-tester", "triage"]
 body:
-  - type: markdown
+  - type: "markdown"
     attributes:
       value: "Thanks for your interest in beta testing LodgifyWP!"
+  - type: "input"
+    id: "website"
+    attributes:
+      label: "Website URL"
+      description: "The website where you plan to use LodgifyWP"
+      placeholder: "https://example.com"
+    validations:
+      required: true
