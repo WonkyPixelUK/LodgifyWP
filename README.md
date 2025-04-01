@@ -1,71 +1,58 @@
 # LodgifyWP
 
-A comprehensive WordPress property booking system consisting of a theme and plugin working together to provide a complete solution for property management and bookings.
+A comprehensive WordPress theme and plugin combination for property booking websites.
+
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
+## Documentation
+
+- [Installation Guide](docs/installation.md)
+- [Development Guide](docs/development.md)
+- [Support Guide](docs/support.md)
+
+## Quick Links
+
+- [Report a Bug](https://github.com/WonkyPixelUK/LodgifyWP/issues)
+- [Request a Feature](https://github.com/WonkyPixelUK/LodgifyWP/issues)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Features
 
-### Theme Features
-- Modern, responsive design
-- Timber/Twig templating
-- SCSS styling
-- ACF Flexible content blocks
-- Automatic plugin dependency management
-- Built-in ACF field synchronization
-
-### Plugin Features
-- Property management system
-- Booking system with calendar
-- Payment processing (Stripe)
-- Calendar synchronization (iCal, Google Calendar, Microsoft 365)
-- Email notifications
-- Owner profiles
+- Complete booking management system
+- Calendar integration (Google Calendar, iCal, Microsoft 365)
+- Stripe payment processing
+- Automated email notifications
+- Property management features
+- Customizable templates
 
 ## Requirements
 
 - WordPress 6.0 or higher
 - PHP 7.4 or higher
-- SSL certificate (for Stripe integration)
-- Node.js and npm (for development)
-- Composer (for development)
+- MySQL 5.7 or higher
+- Advanced Custom Fields PRO plugin
+- Stripe account (for payments)
 
 ## Installation
 
-1. Download the latest release from the [releases page](https://github.com/WonkyPixelUK/LodgifyWP/releases)
-2. Install and activate the LodgifyWP Theme
-3. The theme will automatically prompt you to install and activate:
-   - Advanced Custom Fields PRO
-   - Timber
-   - LodgifyWP Plugin
+See our detailed [Installation Guide](docs/installation.md) for setup instructions.
 
-## Development Setup
+## Contributing
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/WonkyPixelUK/LodgifyWP.git
-   cd LodgifyWP
-   ```
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a Pull Request.
 
-2. Install dependencies:
-   ```bash
-   # Theme dependencies
-   cd lodgifywp-theme
-   npm install
-   
-   # Plugin dependencies
-   cd ../lodgifywp-plugin
-   composer install
-   ```
+## Support
 
-3. Build assets:
-   ```bash
-   # Theme assets
-   cd ../lodgifywp-theme
-   npm run build
-   
-   # Plugin assets
-   cd ../lodgifywp-plugin
-   npm run build
-   ```
+Need help? Check our [Support Guide](docs/support.md) or contact us at support@wonkypixel.co.uk.
+
+## License
+
+This project is licensed under the GPL v2 License - see the [LICENSE](LICENSE) file for details.
+
+## Credits
+
+Created and maintained by [WonkyPixel](https://github.com/WonkyPixelUK).
 
 ## Project Structure
 
