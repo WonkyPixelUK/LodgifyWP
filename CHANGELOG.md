@@ -1,9 +1,34 @@
 # Changelog
 
-All notable changes to the LodgifyWP plugin will be documented in this file.
+All notable changes to the LodgifyWP project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.1.0] - 2024-03-21
+
+### Changed
+- Restructured project to separate theme and plugin components
+- Implemented automatic plugin installation through theme
+- Added automatic version control through Git hooks
+- Improved documentation and project organization
+
+### Added
+- Theme Features:
+  - ACF field synchronization
+  - Automatic plugin dependency management
+  - Timber/Twig templating integration
+  - SCSS styling structure
+  - Built-in plugin installer
+- Development Tools:
+  - Git pre-commit hook for version management
+  - Automated version synchronization
+  - Build process for theme and plugin
+- Documentation:
+  - Comprehensive README
+  - Contributing guidelines
+  - Code of conduct
+  - Issue and PR templates
 
 ## [1.0.0] - 2024-03-21
 
