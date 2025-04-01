@@ -1,0 +1,16 @@
+title: LodgifyWP Documentation
+description: Documentation for the LodgifyWP WordPress theme and plugin
+theme: jekyll-theme-cayman
+
+# Navigation
+header_pages:
+  - installation.md
+  - development.md
+  - support.md
+
+# GitHub information
+github:
+  is_project_page: true
+  repository_url: https://github.com/WonkyPixelUK/LodgifyWP
+  owner_url: https://github.com/WonkyPixelUK
+  owner_name: WonkyPixel 
