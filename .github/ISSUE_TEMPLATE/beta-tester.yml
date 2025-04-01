@@ -1,1 +1,8 @@
-name: Beta Tester Sign-up
+name: "Beta Tester Sign-up"
+description: "Register your interest in beta testing LodgifyWP"
+title: "[Beta Test]: Your Name/Company"
+labels: ["beta-tester", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for your interest in beta testing LodgifyWP!"
